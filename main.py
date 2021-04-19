@@ -14,3 +14,7 @@ gray = cv2.cvtColor(img, cv2.COLOR_BAYER_BG2BGR)
 
 #Detecting the face
 face = faceCascade.detectMultiScale(gray, 1.1,4)
+
+#Draw rectangle around the face
+for(x,y,w,h) in face:
+    cv2.rectangle(img, (x,y),(x+w, y+h), (255,0,0),2)
