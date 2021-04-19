@@ -12,3 +12,5 @@ img = cv2.imread('testFace.jpg')
 #Converting the image into grayscale image
 gray = cv2.cvtColor(img, cv2.COLOR_BAYER_BG2BGR)
 
+#Detecting the face
+face = faceCascade.detectMultiScale(gray, 1.1,4)
