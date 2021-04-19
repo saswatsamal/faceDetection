@@ -8,7 +8,7 @@ faceCascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 img = cv2.imread('testFace.jpg')
 
 #Converting the image into grayscale image
-gray = cv2.cvtColor(img, cv2.COLOR_BAYER_BG2BGR)
+gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
 #Detecting the face
 face = faceCascade.detectMultiScale(gray, 1.1,4)
