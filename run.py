@@ -1,1 +1,3 @@
 #run.py
+import os
+os.system('python main.py')
