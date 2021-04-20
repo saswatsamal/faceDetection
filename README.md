@@ -13,3 +13,18 @@ Face detection is a computer technology being used in a variety of applications 
   - Negative Images – Images of everything else, which do not contain the object we want to detect.
   
 (Know more [here ↗](https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_objdetect/py_face_detection/py_face_detection.html)).
+
+## Haar-cascade Detection in Python(OpenCV)
+- OpenCV comes as a detector which uses Haar Cascade.
+- In face detection, we use the *Haarcascade Frontal Face* which is in `xml` format.
+
+---
+
+# Let's jump into the code
+- What are the requirements you need to have before running the code (all latest version)
+```python
+--- python
+--- opencv-python
+--- haarcascade_frontalface_default.xml
+```
+Download the haar cascade files [here ↗](https://raw.githubusercontent.com/saswatsamal/faceDetection/master/haarcascade_frontalface_default.xml)
