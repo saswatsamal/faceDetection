@@ -21,10 +21,42 @@ Face detection is a computer technology being used in a variety of applications 
 ---
 
 # Let's jump into the code
-- What are the requirements you need to have before running the code (all latest version)
+### What are the requirements you need to have before running the code (all latest version)
 ```python
 --- python
 --- opencv-python
 --- haarcascade_frontalface_default.xml
 ```
 Download the haar cascade files [here ↗](https://raw.githubusercontent.com/saswatsamal/faceDetection/master/haarcascade_frontalface_default.xml)
+
+### First we need to load the required XML classifiers. Then load our input image (or video) in grayscale mode.
+```python
+import numpy as np
+#importing the OpenCV Lib
+import cv2
+
+#Loading the haarcascade front face file
+faceCascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+
+#Reading the face image
+img = cv2.imread('testFace.jpg')
+
+#Converting the image into grayscale image
+gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+```
+### Now we find the faces in the image. If faces are found, it returns the positions of detected faces as Rect(x,y,w,h).
+```python
+#Detecting the face
+face = faceCascade.detectMultiScale(gray, 1.1,4)
+
+#Draw rectangle around the face
+for(x,y,w,h) in face:
+    cv2.rectangle(img, (x,y),(x+w, y+h), (255,0,0),2)
+```
+### Now we will show the output
+```python
+#Display the result with face detected
+cv2.imshow('img',img)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+```
