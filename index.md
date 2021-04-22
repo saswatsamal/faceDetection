@@ -1,37 +1,62 @@
-## Welcome to GitHub Pages
+# Face Detection 
 
-You can use the [editor on GitHub](https://github.com/saswatsamal/faceDetection/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+<img src = "https://raw.githubusercontent.com/saswatsamal/faceDetection/master/img/faceDetection.png">
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+## What is Face Detection?
+Face detection is a computer technology being used in a variety of applications that identifies human faces in digital images. Face detection also refers to the psychological process by which humans locate and attend to faces in a visual scene.
 
-### Markdown
+## What are Haar Cascades?
+- Haar Cascade classifiers are an effective way for object detection. 
+- Proposed by Paul Viola and Michael Jones in their paper Rapid Object Detection using a Boosted Cascade of Simple Features [↗](https://www.researchgate.net/publication/3940582_Rapid_Object_Detection_using_a_Boosted_Cascade_of_Simple_Features)
+- It is a machine learning-based approach where a lot of positive and negative images are used to train the classifier.
+  - Positive images – These images contain the images which we want our classifier to identify.
+  - Negative Images – Images of everything else, which do not contain the object we want to detect.
+  
+(Know more [here ↗](https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_objdetect/py_face_detection/py_face_detection.html)).
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+## Haar-cascade Detection in Python(OpenCV)
+- OpenCV comes as a detector which uses Haar Cascade.
+- In face detection, we use the *Haarcascade Frontal Face* which is in `xml` format.
 
-```markdown
-Syntax highlighted code block
+---
 
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+# Let's jump into the code
+### What are the requirements you need to have before running the code (all latest version)
+```python
+--- python
+--- opencv-python
+--- haarcascade_frontalface_default.xml
 ```
+Download the haar cascade files [here ↗](https://raw.githubusercontent.com/saswatsamal/faceDetection/master/haarcascade_frontalface_default.xml)
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+### First we need to load the required XML classifiers. Then load our input image (or video) in grayscale mode.
+```python
+import numpy as np
+#importing the OpenCV Lib
+import cv2
 
-### Jekyll Themes
+#Loading the haarcascade front face file
+faceCascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/saswatsamal/faceDetection/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+#Reading the face image
+img = cv2.imread('testFace.jpg')
 
-### Support or Contact
+#Converting the image into grayscale image
+gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+```
+### Now we find the faces in the image. If faces are found, it returns the positions of detected faces as Rect(x,y,w,h).
+```python
+#Detecting the face
+face = faceCascade.detectMultiScale(gray, 1.1,4)
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+#Draw rectangle around the face
+for(x,y,w,h) in face:
+    cv2.rectangle(img, (x,y),(x+w, y+h), (255,0,0),2)
+```
+### Now we will show the output
+```python
+#Display the result with face detected
+cv2.imshow('img',img)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+```
